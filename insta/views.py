@@ -34,6 +34,7 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'auth/register.html', {'form': form})
 
+@login_required
 def profile(request):
     return render(request, 'insta/profile.html')
     
