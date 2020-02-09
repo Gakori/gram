@@ -3,7 +3,7 @@
 {% block content %}
 
 {% for post in posts %}
-<img src="{{post.image}}" alt="" class="spider">
+<img src="{{ post.image.url }}" alt="" class="spider">
 <h1>{{ post.title }}</h1>
 <h1>posted on {{ post.date_posted }}</h1>
 {% endfor %}
