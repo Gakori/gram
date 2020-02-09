@@ -15,16 +15,28 @@
 
     <link rel="stylesheet" href="{% static 'css/nav.css' %}">
 
+    <link rel="stylesheet" href="css/all.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   </head>
   <body>
     <ul>
-      <li><a class="active" href="{% url 'insta-home' %}">Instagram</a></li>
-      <li><a class="active" href="#">New Post</a></li>
-      <li><a class="active" href="{%url 'profile' %}">Profile</a></li>
+      <li><a class="active fa fa-camera" style="color: black;" href="{% url 'insta-home' %}">Instagram</a></li>
       
+      <li><a class="active" href="#">New Post</a></li>
     </ul>
-    <i class="fas fa-ad"></i>
     {% block content %}
     {% endblock content %}
+
+    <div class="footer">
+    <footer>
+      <a href="{% url 'insta-home' %}" class="fa fa-home" style="font-size:45px; color:black"></a>
+      <a href="#" class="fa fa-search" style="font-size:45px; color:black"></a>
+      <a href="#" class="fa fa-plus-square" style="font-size:45px; color:black"></a>
+      <a href="#" class="fa fa-heart" style="font-size:45px; color:black"></a>
+      <a href="{% url 'profile' %}" class="fa fa-user" style="font-size:45px; color:black"></a>
+    </footer>
+  </div>
   </body>
 </html>
