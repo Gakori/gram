@@ -1,1 +1,11 @@
-<h1>Instagram</h1>
+{% extends 'insta/base.html' %}
+
+{% block content %}
+
+{% for post in posts %}
+<img src="{{post.image}}" alt="" class="spider">
+<h1>{{ post.title }}</h1>
+<h1>posted on {{ post.date_posted }}</h1>
+{% endfor %}
+{% endblock content %}
+
