@@ -38,7 +38,7 @@ urlpatterns = [
 
     path('logout/', auth_views.LogoutView.as_view(template_name='auth/logout.html'), name='logout'),    
     
-    path('profile/', insta_views.profile, name='profile' ),  
+    path('profile/', insta_views.profile, name='profile'),  
 ]
 
 if settings.DEBUG:
