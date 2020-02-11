@@ -22,7 +22,7 @@
 
 ## SetUp / Installation Requirements
   Clone the repo by running:
-*   git clone https://github.com/Gakori/instagram.git
+*   git clone https://github.com/Gakori/gram.git
 
  Navigate to the project directory;
 *   cd instagram
