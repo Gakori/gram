@@ -25,12 +25,17 @@ from django.contrib.auth import views as auth_views
 
 from insta import views as insta_views
 
+from insta import views
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     
     path('insta/', include('insta.urls')),
     
     path('', include('insta.urls')),
+    
+    path('', views.home, name='insta-home'),
     
     path('register/', insta_views.register, name='register'),
     
@@ -39,6 +44,11 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='auth/logout.html'), name='logout'),    
     
     path('profile/', insta_views.profile, name='profile'),  
+    
+    path('search/', insta_views.search, name='search'),
+    
+    path('comment/', insta_views.comment, name='comment'),
+    
 ]
 
 if settings.DEBUG:
