@@ -1,0 +1,26 @@
+h1{
+    font-size: 15px;
+}
+
+.spider{
+    height: 20%;
+    width: 20%;
+    margin-top: 10px;
+}
+
+.footer{
+    position: fixed;
+    left: 0px;
+    bottom: 0;
+    width: 100%;
+    background-color: whitesmoke;
+    text-align: center;
+}
+
+a{
+    margin-right: 100px;
+}
+
+h2{
+    font-size: 20px;
+}

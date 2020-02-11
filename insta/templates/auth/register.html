@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="content-section">
+    <div class="content-section" style="width: x; font-size: 20px;">
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
@@ -10,7 +10,7 @@
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+                <button class="btn btn-outline-info" type="submit" style="font-size: 20px;">Sign Up</button>
             </div>
         </form>
 

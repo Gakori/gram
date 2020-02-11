@@ -1,0 +1,38 @@
+{% extends 'insta/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="comments">
+
+    {% if comments %}
+    {% for comment in comments %}
+
+    <h2>{{comment.body}}</h2>
+    <div class="body">
+      <p class="posted">
+        <small class="text-muted"
+          >Posted on: {{comment.posted_on}}</small
+        >
+      </p>
+      <p class="posted">
+        <small class="text-muted"
+          >Posted By: {{comment.posted_by}}</small
+        >
+      </p>
+    </div>
+
+    {% if user.is_authenticated %}
+    <a class="btn btn-outline-danger" href="#">Delete</a>
+    {% elif %}
+    <a class="btn btn-outline" href="#">Delete</a>
+
+    {% endif %}
+
+    {% endfor %}
+    {% else %}
+
+    <h3>There are no comments for this site</h3>
+    {% endif %}
+  </div>
+</div>
+{% endblock content %}

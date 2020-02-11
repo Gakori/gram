@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrap4',
+    'pyuploadcare.dj',
     'crispy_forms',
     'insta.apps.InstaConfig',
     'django.contrib.admin',
@@ -56,7 +58,7 @@ ROOT_URLCONF = 'gram.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -64,10 +66,17 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+ 
             ],
         },
     },
 ]
+
+UPLOADCARE = {
+    'pub_key': 'dd477cfd046b9e4fbe19',
+    'secret': 'cbecd15fc965bfde99a6',
+}
+
 
 WSGI_APPLICATION = 'gram.wsgi.application'
 
@@ -117,15 +126,28 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOGIN_REDIRECT_URL='insta-home'
-LOGIN_URL='login'
+# LOGIN_REDIRECT_URL='insta-home'
+# LOGIN_URL='login'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
-
-CRISPY_TEMPLATE_PACK='bootstrap4'
 
 MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
 MEDIA_URL='/media/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'static')
+]
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+# redirect on succesful login
+LOGIN_REDIRECT_URL = 'insta-home'
+LOGIN_URL='login'
+LOGOUT_REDIRECT_URL ='login'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

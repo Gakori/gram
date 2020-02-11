@@ -1,0 +1,184 @@
+{% extends 'insta/base.html' %}
+{% block content %}
+
+
+  <link href="https://fonts.googleapis.com/css?family=Inria+Serif&display=swap" rel="stylesheet">
+  <body class="hu" style="background-image: url('https://cdn.pixabay.com/photo/2018/01/02/08/15/social-media-305570'); background-repeat: no-repeat; background-size: cover;">
+    <div>
+      <form>
+        <h3>Enter your instagram username to fetch your information</h3>
+        
+        <input
+          id="username_s"
+          type="text"
+          name="FirstName"
+          value="tolliverboyz"
+        />
+        <button type="button" class="search" onclick="loadJSON()">Search</button>
+      </form>
+    </div>
+
+    <div>
+      <ul id="Foll"></ul>
+    </div>
+
+    <script>
+      var username_s = document.getElementById("username_s");
+      function loadJSON() {
+        var data_file =
+          "https://www.instagram.com/" + username_s.value + "/?__a=1";
+        var http_request = new XMLHttpRequest();
+        http_request.onreadystatechange = function() {
+          if (http_request.readyState == 4) {
+            // Javascript function JSON.parse to parse JSON data
+            var jsonObj = JSON.parse(http_request.responseText);
+            // jsonObj variable now contains the data structure and can
+            // be accessed as jsonObj.name and jsonObj.country.
+            document.getElementById("Foll").innerHTML =
+              "  <li> <span> Instagram UName:</span>  " +
+              jsonObj.graphql.user.full_name +
+              "</li>" +
+              "  <li> <span>Category: </span> " +
+              jsonObj.graphql.user.business_category_name +
+              "</li>" +
+              "  <li> <span>Followers: </span> " +
+              jsonObj.graphql.user.edge_followed_by.count +
+              "</li>" +
+              "  <li> <span>Follows: </span> " +
+              jsonObj.graphql.user.edge_follow.count +
+              "</li>" +
+              '  <li> <span> Link: </span><a href=" ' +
+              jsonObj.graphql.user.external_url +
+              '"> ' +
+              jsonObj.graphql.user.external_url +
+              "</a> </li>" +
+              "  <li> <span>Bio:</span>" +
+              jsonObj.graphql.user.biography +
+              "</li>" +
+              //   + "  <i></br> ID:</i> "
+              //   + jsonObj.graphql.user.id
+              "  <li>" +
+              " </br> <img src=" +
+              jsonObj.graphql.user.profile_pic_url_hd +
+              "> </li> ";
+          }
+        };
+        http_request.open("GET", data_file, true);
+        http_request.send();
+      }
+    </script>
+  </body>
+  {% endblock content %}
+<style>
+body {
+margin:0px; 
+background: white;
+padding: 0;
+}
+.search {
+  background-image: linear-gradient(to right, #5f2c82 0%, #49a09d 51%, #5f2c82 100%);
+  font-weight:bold;
+  border: none;
+}
+.active, .search:hover{
+  background-color: #555;
+  border-radius:20px;
+}
+form {
+        display:block;
+        width:100%;
+        float:left;
+        position:relative;
+        margin:0 auto;
+        padding:0;
+        margin-bottom: 30px;
+        z-index:3;  
+}
+h3{
+    text-align: center;
+    color: black;
+    margin-top: 20px 20px;
+    font-size: 30px;
+    font-family: 'Inria Serif', serif;
+    
+}
+button {
+    display:block;
+    position:relative;
+    margin:0 auto;
+    width:200px;
+    height:50px;
+    border-radius:none;
+    border:none;
+    background:#6869FF ;
+    color:white;
+    
+    
+}
+input {
+        display:block;
+        position:relative;
+        margin:0 auto; 
+        width:70%;
+        height:50px;
+        border-radius:20px;
+        background:#1ABC9C;
+        color:black;
+        border: none;
+        padding:0 20px;
+}
+a{
+    
+    color:black;
+}
+a:hover{
+    
+    color:#6869FF;
+}
+input:focus {
+    
+    color:black;
+    border:2px solid black;
+}
+input:hover{
+    
+     color:red;
+    border:2px solid red;
+}
+div {
+    display:block;
+    position:relative;
+    width:100%;
+}
+li{
+    display:block;
+    position:relative;
+    margin:0 auto;
+    padding:0;
+}
+ul{
+    display:block;
+    
+}
+#Foll {
+    display:block; 
+    position:relative;
+    width:80%;
+    color:black;
+    font-size:25px;
+    margin:0 auto;
+    padding-bottom:30px;
+    z-index: 1;
+}
+img{
+    display:block;
+    width:300px;
+    height:300px;
+    border-radius: 50%;
+    margin:0 auto;
+    
+}
+span{
+    color: #1ABC9C;
+}
+</style>
