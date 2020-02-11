@@ -1,23 +1,49 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import Post
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView, CreateView
 from django.contrib import messages
 from .models import Post
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, CommentForm, PostForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 
 def home(request):
     context = {
         'posts':Post.objects.all()
     }
-    return render(request, 'insta/home.html',category)
+    ordering =['-date_posted']
+    
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+    else:
+        form = PostForm()
 
-class PostListView(ListView):
-    model = Post
-    template_name = 'insta/home.html'  # <app>/<model>_<viewtype>.html
-    context_object_name = 'posts'
+    try:
+        posts = Post.objects.all()
+    except Post.DoesNotExist:
+        posts = None
+        
+
+    return render(request, 'insta/home.html', { 'posts': posts, 'form': form })
+
+# class PostListView(ListView):
+    # model = Post
+    # template_name = 'insta/home.html' # <app>/<model>_<viewtype>.html
+    # context_object_name = 'posts'
+    # ordering =['-date_posted']
+    
+# class PostCreateView(CreateView):
+#     model = Post
+#     fields = ['title','image']
+#     success_url = reverse_lazy('insta-home')
+    
+#     def form_valid(self, form):
+#         form.instance.iuser = self.request.user
+#         return super().form_valid(form)
     
 def register(request):
     '''
@@ -54,6 +80,21 @@ def profile(request):
         'p_form': p_form
     }
     
-    return render(request, 'insta/profile.html')
+    return render(request, 'insta/profile.html', context)
+
+def search(request):
+    return render(request, 'insta/search.html')
+
+def comment(request):
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            return redirect('insta-home')
+    else:
+        form = CommentForm()
+    return render(request, 'insta/comment.html', {'form': form})
+
     
     
